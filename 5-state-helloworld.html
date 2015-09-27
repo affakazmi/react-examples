@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>React - Hello World</title>
+	<style type="text/css">
+	</style>
+	<script src="http://fb.me/react-0.12.2.js"></script>
+	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>	
+	<div id='app-container'></div>
+	<script type="text/jsx">
+		var Recipe = React.createClass({
+			getInitialState: function () {
+				console.log(this.props);
+				return {
+					dropDownIsOpen : false,
+				};
+			},
+			handleClick: function () {
+				this.setState({
+					dropDownIsOpen : !this.state.dropDownIsOpen
+				});
+			},
+			renderDropdown: function () {
+				return (
+					<div>
+						<p> {this.props.instruction} </p>
+					</div>
+				);
+			},
+			render: function() {
+				var dropdown = this.state.dropDownIsOpen ? this.renderDropdown() : null;
+				return (
+					<div onClick={this.handleClick}>
+						<h2> {this.props.title} </h2>
+						{dropdown}
+					</div>
+				);
+			}
+		});
+		var RecipeList = React.createClass({
+			render: function() {
+				var recipeNodes = this.props.data.map(function(recipe, index){
+					return (
+						<Recipe 
+							key={index}
+							title={recipe.title}
+							instruction={recipe.instruction}
+						/>
+					)
+				});
+				return (
+					<div>
+						Hello World! ! am a Recipe List.
+						{recipeNodes}
+					</div>
+				);
+			}
+		});
+		var RecipeForm = React.createClass({
+			render: function() {
+				return (
+					<div>
+						Hello World! ! am a Recipe Form.
+					</div>
+				);
+			}
+		});
+		var RecipeBook = React.createClass({
+			render: function() {
+				return (
+					<div>
+						Hello World! ! am a Recipe Book.
+						<RecipeList data={this.props.data} />
+						<RecipeForm />	
+					</div>
+				);
+			}
+		});
+		window.recipedata = [
+			{title: "Alo Gosht", instruction: "Required Alo and Gosht"},
+			{title: "Alo Gobhi", instruction: "Required Alo and Gobhi"}
+		];
+		React.render(
+			<RecipeBook data={window.recipedata} />,
+			document.getElementById('app-container')
+		);
+	</script>
+</body>
+</html>

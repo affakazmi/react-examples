@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>React - Hello World</title>
+	<style type="text/css">
+	</style>
+	<script src="http://fb.me/react-0.12.2.js"></script>
+	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>
+	<div id='app-container'></div>
+	<script type="text/jsx">
+		var RecipeList = React.createClass({
+			render: function(){
+				return (
+					<div>
+						Hello World! ! am a Recipe List.
+					</div>
+				);
+			}
+		});
+		var RecipeForm = React.createClass({
+			render: function(){
+				return (
+					<div>
+						Hello World! ! am a Recipe Form.
+					</div>
+				);
+			}
+		});
+		var RecipeBook = React.createClass({
+			render: function(){
+				return (
+					<div>
+						Hello World! ! am a Recipe Book.
+						<RecipeList />,
+						<RecipeForm />,
+					</div>
+				);
+			}
+		});
+		React.render(
+			<RecipeBook />,
+			document.getElementById('app-container')
+		);
+	</script>
+</body>
+</html>
